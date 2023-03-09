@@ -47,6 +47,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     DWORD dwTime = GetTickCount64();
 
+    CMainGame mainGame;
+    //mainGame.Initialize();
+
+
     // 기본 메시지 루프입니다:
     while (true)
     {
