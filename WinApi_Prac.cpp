@@ -1,6 +1,7 @@
 ﻿// WinApi_Prac.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+#include "stdafx.h"
 #include "framework.h"
 #include "WinApi_Prac.h"
 
@@ -10,6 +11,7 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+HWND g_hwnd;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -41,15 +43,35 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINAPIPRAC));
 
     MSG msg;
+    msg.message = WM_NULL;
+
+    DWORD dwTime = GetTickCount64();
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (WM_QUIT == msg.message)
+            {
+                break;
+            }
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
+        else
+        {
+            if (dwTime + 10 < GetTickCount64())
+            {
+                //
+
+                dwTime = GetTickCount64();
+            }
+        }
+
     }
 
     return (int) msg.wParam;
@@ -76,7 +98,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINAPIPRAC));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_WINAPIPRAC);
+    wcex.lpszMenuName   = NULL; // NULL 로 변경
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -97,13 +119,20 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
+   RECT rc{ 0, 0, WINCX, WINCY };
+
+   AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+
 
    if (!hWnd)
    {
       return FALSE;
    }
+
+   g_hwnd = hWnd;
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
@@ -150,6 +179,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+    case WM_KEYDOWN:
+        switch (wParam)
+        {
+        case VK_ESCAPE:
+            PostQuitMessage(0);
+            break;
+        default:
+            break;
+        }
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
