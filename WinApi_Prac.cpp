@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "framework.h"
 #include "WinApi_Prac.h"
+#include "MainGame.h"
 
 #define MAX_LOADSTRING 100
 
@@ -45,7 +46,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
     msg.message = WM_NULL;
 
-    DWORD dwTime = GetTickCount64();
+    CMainGame MainGame;
+    MainGame.Initialize();
+
+    DWORD dwTime = GetTickCount();
 
     // 기본 메시지 루프입니다:
     while (true)
@@ -64,11 +68,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            if (dwTime + 10 < GetTickCount64())
+            if (dwTime + 10 < GetTickCount())
             {
-                //
+                MainGame.Update();
+                MainGame.Render();
 
-                dwTime = GetTickCount64();
+                dwTime = GetTickCount();
             }
         }
 
@@ -185,9 +190,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case VK_ESCAPE:
             PostQuitMessage(0);
             break;
-        default:
-            break;
         }
+        break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
