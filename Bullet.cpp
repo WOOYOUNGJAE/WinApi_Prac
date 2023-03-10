@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Bullet.h"
+#include "MainGame.h"
 
 CBullet::CBullet()
 {
@@ -19,6 +20,8 @@ void CBullet::Initialize()
 
 void CBullet::Update()
 {
+	CheckCeiling();
+
 	switch (m_eMoveDir)
 	{
 	case MY_DIRECTION::LEFT:
@@ -69,4 +72,17 @@ void CBullet::Render(HDC _hdc)
 
 void CBullet::Release()
 {
+}
+
+void CBullet::CheckCeiling()
+{
+	if (m_tPosInfo.fY < m_tPosInfo.fCY * 0.5f)
+	{
+		SelfDestroy();
+	}
+}
+
+void CBullet::SelfDestroy()
+{
+	m_pMainGame->DestroyBullet(this);
 }

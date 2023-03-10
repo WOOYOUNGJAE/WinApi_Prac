@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "MainGame.h"
 
 CPlayer::CPlayer()
 {
@@ -22,6 +23,14 @@ void CPlayer::Initialize(list<CObj*>* _pBullet)
 	m_fMoveSpeed = 5.f;
 
 	m_pBullet = _pBullet;
+}
+void CPlayer::Initialize(list<CObj*>* _pBullet, CMainGame* _pMainGame)
+{
+	m_tPosInfo = { WINCX * 0.5f, WINCY * 0.5f, 50, 50 };
+	m_fMoveSpeed = 5.f;
+
+	m_pBullet = _pBullet;
+	m_pMainGame = _pMainGame;
 }
 
 void CPlayer::Update()
@@ -63,7 +72,7 @@ void CPlayer::EnterKey()
 		m_tPosInfo.fY += m_fMoveSpeed;
 	}
 	// ÃÑ¾Ë
-	else if (GetAsyncKeyState('W'))
+ 	else if (GetAsyncKeyState('W'))
 	{
 		m_pBullet->push_back(CreateBullet(MY_DIRECTION::UP));
 	}
@@ -111,7 +120,7 @@ CObj* CPlayer::CreateBullet(MY_DIRECTION _eDir)
 	CObj* pTmpBullet = new CBullet;
 
 	pTmpBullet->Initialize();
-
+	static_cast<CBullet*>(pTmpBullet)->Set_pMainGame(m_pMainGame);
 	pTmpBullet->Set_Pos(m_tPosInfo.fX, m_tPosInfo.fY);
 	pTmpBullet->Set_Dir(_eDir);
 

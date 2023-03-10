@@ -24,4 +24,14 @@ enum class MY_DIRECTION
 	END,
 };
 
+template<typename T>
+void Safe_Delete(T& Temp)
+{
+	if (Temp)
+	{
+		delete Temp;
+		Temp = nullptr;
+	}
+}
+
 extern HWND g_hwnd;
