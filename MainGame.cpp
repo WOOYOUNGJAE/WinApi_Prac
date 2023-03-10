@@ -8,7 +8,7 @@ void CMainGame::Initialize()
 	if (!m_pPlayer)
 	{
 		m_pPlayer = new CPlayer;
-		static_cast<CPlayer*>(m_pPlayer)->Initialize(&m_bulletList);
+		static_cast<CPlayer*>(m_pPlayer)->Initialize(&m_bulletList, this);
 	}
 
 	if (!m_pEnemy)
@@ -22,9 +22,12 @@ void CMainGame::Update()
 {
 	m_pPlayer->Update();
 	m_pEnemy->Update();
-	for (auto& iter : m_bulletList)
+	//for (auto& iter : m_bulletList)
+	for (list<CObj*>::iterator iter = m_bulletList.begin();
+		iter != m_bulletList.end(); ++iter)
 	{
-		iter->Update();
+		if (*iter)
+			(*iter)->Update();
 	}
 }
 
