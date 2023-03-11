@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MainGame.h"
 
-CMainGame::CMainGame()
+CMainGame::CMainGame() : m_pPlayer(nullptr)
 {
 }
 
@@ -28,9 +28,18 @@ void CMainGame::Update()
 {
 	for (size_t i = 0; i < OBJ_ID::OBJ_ID_END; ++i)
 	{
-		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end(); ++iter)
+		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end();)
 		{
-			(*iter)->Update();
+			if (((*iter)->Get_State() & OBJ_STATE::ACTIVE) != 0) // 살아있으면
+			{
+				(*iter)->Update();
+				++iter;
+			}
+			else
+			{
+				SAFE_DELETE(*iter);
+				iter = m_ObjList[i].erase(iter);
+			}
 		}
 	}
 
@@ -38,12 +47,19 @@ void CMainGame::Update()
 
 void CMainGame::LateUpdate()
 {
-	m_pPlayer->LateUpdate();
+	for (size_t i = 0; i < OBJ_ID::OBJ_ID_END; ++i)
+	{
+		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end(); ++iter)
+		{
+			(*iter)->LateUpdate();
+		}
+	}
 }
 
 void CMainGame::Render()
 {
 	Rectangle(m_dc, 0, 0, WINCX, WINCY);
+	Rectangle(m_dc, DESTROYZONE_LEFT, DESTROYZONE_TOP, DESTROYZONE_RIGHT, DESTROYZONE_BOTTOM);
 
 	for (size_t i = 0; i < OBJ_ID::OBJ_ID_END; ++i)
 	{

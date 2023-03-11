@@ -58,6 +58,14 @@ void CBullet::Update()
 
 void CBullet::LateUpdate()
 {
+	if (m_tPosInfo.fX - m_tPosInfo.fCX * 0.5f < DESTROYZONE_LEFT ||
+		m_tPosInfo.fX + m_tPosInfo.fCX * 0.5f > DESTROYZONE_RIGHT ||
+		m_tPosInfo.fY - m_tPosInfo.fCY * 0.5f < DESTROYZONE_TOP ||
+		m_tPosInfo.fY + m_tPosInfo.fCY * 0.5f > DESTROYZONE_BOTTOM
+		)
+	{
+		m_eState &= ~OBJ_STATE::ACTIVE;
+	}
 }
 
 void CBullet::Render(HDC _dc)

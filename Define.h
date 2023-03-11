@@ -3,6 +3,12 @@
 #define WINCX 800
 #define WINCY 600
 
+//Destroy Zone
+#define DESTROYZONE_LEFT 80
+#define DESTROYZONE_TOP 60
+#define DESTROYZONE_RIGHT WINCX-80
+#define DESTROYZONE_BOTTOM WINCY-60
+
 struct PosInfo
 {
 	float fX;
@@ -31,12 +37,12 @@ enum OBJ_ID
 	OBJ_ID_END,
 };
 
-//enum OBJ_STATE// : int
-//{
-//	STATE_START = 0,
-//	ACTIVE = 1 << 0,
-//	STATE_END = 1 << 1,
-//};
+enum OBJ_STATE// : int
+{
+	STATE_START = 0,
+	ACTIVE = 1 << 0,
+	STATE_END = 1 << 1,
+};
 
 template<typename T>
 void SAFE_DELETE(T& tmp)

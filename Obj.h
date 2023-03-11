@@ -8,7 +8,7 @@ public:
 
 public:
 	// getter
-	//int Get_State();
+	int Get_State();
 
 	//setter
 	void Set_Pos(float _fX, float _fY)
