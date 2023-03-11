@@ -11,7 +11,7 @@ struct PosInfo
 	float fCY;
 };
 
-enum class MY_MOVEDIRECTION
+enum MY_MOVEDIRECTION
 {
 	UP,
 	RIGHT,
@@ -23,6 +23,20 @@ enum class MY_MOVEDIRECTION
 	LD,
 	DIR_END,
 };
+
+enum OBJ_ID 
+{
+	ID_PLAYER,
+	ID_BULLET,
+	OBJ_ID_END,
+};
+
+//enum OBJ_STATE// : int
+//{
+//	STATE_START = 0,
+//	ACTIVE = 1 << 0,
+//	STATE_END = 1 << 1,
+//};
 
 template<typename T>
 void SAFE_DELETE(T& tmp)

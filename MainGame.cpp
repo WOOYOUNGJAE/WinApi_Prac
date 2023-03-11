@@ -24,6 +24,17 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {
+	//for (size_t i = 0; i < OBJ_ID::OBJ_ID_END; ++i)
+	//{
+	//	for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end(); ++iter)
+	//	{
+	//		(*iter)->Update();
+	//		/*if ( ((*iter)->Get_State() & OBJ_STATE::ACTIVE) == 1)
+	//		{
+	//		}*/
+	//	}
+	//}
+
 	m_pPlayer->Update();
 
 	for (auto& iter : m_bulletList)

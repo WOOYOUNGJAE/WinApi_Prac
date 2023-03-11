@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "Factory.h"
 
 CPlayer::CPlayer(): m_pBulletSlot(nullptr)
 {
@@ -71,28 +72,44 @@ void CPlayer::GetKey()
 	// bullet
 	else if(GetAsyncKeyState('W'))
 	{
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::UP));
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::UP)
+		);
 	}
 	else if(GetAsyncKeyState('D'))
 	{
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::RIGHT));
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::RIGHT)
+		);
 	}
 	else if(GetAsyncKeyState('A'))
 	{
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::LEFT));
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::LEFT)
+		);
 	}
 	else if(GetAsyncKeyState('E'))
 	{
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::RU));
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::RU)
+		);
 	}
 	else if(GetAsyncKeyState('Q'))
 	{
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::LU));
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::LU)
+		);
 	}
 	else if(GetAsyncKeyState(VK_SPACE))
 	{
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::RU));
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::UP));
-		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::LU));
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::LU)
+		);
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::UP)
+		);
+		m_pBulletSlot->push_back(
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::RU)
+		);
 	}
 }

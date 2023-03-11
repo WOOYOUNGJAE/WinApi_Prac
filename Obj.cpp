@@ -3,13 +3,19 @@
 
 CObj::CObj() :
 	m_rectInfo{}, m_tPosInfo{}, m_eMoveDir(MY_MOVEDIRECTION::DIR_END),
-	m_fMoveSpeed(0)
+	m_fMoveSpeed(0)//, m_eState(OBJ_STATE::STATE_START)
 {
+	//m_eState = m_eState | OBJ_STATE::ACTIVE;
 }
 
 CObj::~CObj()
 {
 }
+
+//int CObj::Get_State()
+//{
+//	return m_eState;
+//}
 
 void CObj::RenewRECT()
 {
