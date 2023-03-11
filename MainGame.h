@@ -24,4 +24,5 @@ private:
 	HDC m_dc;
 
 	CObj* m_pPlayer;
+	list<CObj*> m_bulletList;
 };

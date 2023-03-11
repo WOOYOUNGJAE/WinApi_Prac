@@ -11,7 +11,7 @@ struct PosInfo
 	float fCY;
 };
 
-enum class My_MOVEDIRECTION
+enum class MY_MOVEDIRECTION
 {
 	UP,
 	RIGHT,
@@ -24,4 +24,13 @@ enum class My_MOVEDIRECTION
 	DIR_END,
 };
 
+template<typename T>
+void SAFE_DELETE(T& tmp)
+{
+	if (tmp)
+	{
+		delete tmp;
+		tmp = nullptr;
+	}
+}
 extern HWND g_hwnd;

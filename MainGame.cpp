@@ -18,12 +18,18 @@ void CMainGame::Initialize()
 	{
 		m_pPlayer = new CPlayer;
 		m_pPlayer->Initialize();
+		static_cast<CPlayer*>(m_pPlayer)->Set_BulletSlot(&m_bulletList);
 	}
 }
 
 void CMainGame::Update()
 {
 	m_pPlayer->Update();
+
+	for (auto& iter : m_bulletList)
+	{
+		iter->Update();
+	}
 }
 
 void CMainGame::LateUpdate()
@@ -36,8 +42,19 @@ void CMainGame::Render()
 	Rectangle(m_dc, 0, 0, WINCX, WINCY);
 
 	static_cast<CPlayer*>(m_pPlayer)->Render(m_dc);
+
+	for (auto& iter : m_bulletList)
+	{
+		iter->Render(m_dc);
+	}
 }
 
 void CMainGame::Release()
 {
+	SAFE_DELETE(m_pPlayer);
+	
+	for (auto* iter : m_bulletList)
+	{
+		SAFE_DELETE(iter);
+	}
 }

@@ -1,12 +1,18 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Bullet.h"
 
-CPlayer::CPlayer()
+CPlayer::CPlayer(): m_pBulletSlot(nullptr)
 {
 }
 
 CPlayer::~CPlayer()
 {
+}
+
+void CPlayer::Set_BulletSlot(list<CObj*>* _pBulletSlot)
+{
+	m_pBulletSlot = _pBulletSlot;
 }
 
 void CPlayer::Initialize()
@@ -24,7 +30,7 @@ void CPlayer::Update()
 
 void CPlayer::LateUpdate()
 {
-}
+}	
 
 void CPlayer::Render(HDC _dc)
 {
@@ -33,6 +39,15 @@ void CPlayer::Render(HDC _dc)
 
 void CPlayer::Release()
 {
+}
+
+CObj* CPlayer::CreateBullet(MY_MOVEDIRECTION _eDir)
+{
+	CObj* pTmpBullet = new CBullet;
+	pTmpBullet->Initialize();
+	pTmpBullet->Set_Pos(m_tPosInfo.fX, m_tPosInfo.fY);
+	pTmpBullet->Set_Dir(_eDir);
+	return pTmpBullet;
 }
 
 void CPlayer::GetKey()
@@ -52,5 +67,32 @@ void CPlayer::GetKey()
 	else if(GetAsyncKeyState(VK_LEFT))
 	{
 		m_tPosInfo.fX -= m_fMoveSpeed;
+	}
+	// bullet
+	else if(GetAsyncKeyState('W'))
+	{
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::UP));
+	}
+	else if(GetAsyncKeyState('D'))
+	{
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::RIGHT));
+	}
+	else if(GetAsyncKeyState('A'))
+	{
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::LEFT));
+	}
+	else if(GetAsyncKeyState('E'))
+	{
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::RU));
+	}
+	else if(GetAsyncKeyState('Q'))
+	{
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::LU));
+	}
+	else if(GetAsyncKeyState(VK_SPACE))
+	{
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::RU));
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::UP));
+		m_pBulletSlot->push_back(CreateBullet(MY_MOVEDIRECTION::LU));
 	}
 }

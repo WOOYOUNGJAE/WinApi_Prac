@@ -2,18 +2,17 @@
 #include "Obj.h"
 #include "Define.h"
 
-class CPlayer : public CObj
+class CBullet : public CObj
 {
 public:
-	CPlayer();
-	~CPlayer();
+	CBullet();
+	~CBullet();
 
 public:
 	// getter
 
 	//setter
-	void Set_BulletSlot(list<CObj*>* _pBulletSlot);
-
+	
 	// I U R R
 	virtual void Initialize();
 	virtual void Update();
@@ -21,10 +20,4 @@ public:
 	virtual void Render(HDC _dc);
 	virtual void Release();
 
-	//
-	CObj* CreateBullet(MY_MOVEDIRECTION _eDir);
-
-	void GetKey();
-private:
-	list<CObj*>* m_pBulletSlot;
 };

@@ -2,7 +2,7 @@
 #include "Obj.h"
 
 CObj::CObj() :
-	m_rectInfo{}, m_tPosInfo{}, m_eMoveDir(My_MOVEDIRECTION::DIR_END),
+	m_rectInfo{}, m_tPosInfo{}, m_eMoveDir(MY_MOVEDIRECTION::DIR_END),
 	m_fMoveSpeed(0)
 {
 }

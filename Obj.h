@@ -15,7 +15,7 @@ public:
 		m_tPosInfo.fX = _fX;
 		m_tPosInfo.fY = _fY;
 	}
-	void Set_Dir(My_MOVEDIRECTION _eDir)
+	void Set_Dir(MY_MOVEDIRECTION _eDir)
 	{
 		m_eMoveDir = _eDir;
 	}
@@ -30,9 +30,12 @@ public:
 	virtual void RenewRECT();
 
 protected:
+	// 상속
 	RECT m_rectInfo;
 	PosInfo m_tPosInfo;
 
-	My_MOVEDIRECTION m_eMoveDir;
+
+	// 움직임
+	MY_MOVEDIRECTION m_eMoveDir;
 	float m_fMoveSpeed;
 };
