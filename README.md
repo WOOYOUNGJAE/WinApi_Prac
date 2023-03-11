@@ -1,4 +1,4 @@
 # WinApi_Prac
  
-시작 템플릿
-~ MainGame 클래스까지
+총알 템플릿
+발사까지
