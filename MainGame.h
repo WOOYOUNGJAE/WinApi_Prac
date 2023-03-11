@@ -23,8 +23,6 @@ public:
 private:
 	HDC m_dc;
 
-	list<CObj*> m_ObjList[OBJ_ID::OBJ_ID_END];
-
 	CObj* m_pPlayer;
 	list<CObj*> m_bulletList;
 };

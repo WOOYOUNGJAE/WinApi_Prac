@@ -8,7 +8,6 @@ public:
 
 public:
 	// getter
-	//int Get_State();
 
 	//setter
 	void Set_Pos(float _fX, float _fY)
@@ -31,7 +30,7 @@ public:
 	virtual void RenewRECT();
 
 protected:
-	int m_eState;
+	// »ó¼Ó
 	RECT m_rectInfo;
 	PosInfo m_tPosInfo;
 
