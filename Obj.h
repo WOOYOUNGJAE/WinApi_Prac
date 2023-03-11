@@ -27,7 +27,7 @@ public:
 	virtual void Release() = 0;
 
 	//	
-	virtual void RenewRECT();
+	void RenewRECT();
 
 protected:
 	RECT m_rectInfo;
