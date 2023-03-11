@@ -1,4 +1,3 @@
 # WinApi_Prac
  
-시작 템플릿
-~ MainGame 클래스까지
+총알 벽에 부딪히면 삭제
