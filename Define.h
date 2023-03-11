@@ -47,4 +47,5 @@ void SAFE_DELETE(T& tmp)
 		tmp = nullptr;
 	}
 }
+
 extern HWND g_hwnd;

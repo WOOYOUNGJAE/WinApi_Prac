@@ -73,43 +73,43 @@ void CPlayer::GetKey()
 	else if(GetAsyncKeyState('W'))
 	{
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::UP)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::UP)
 		);
 	}
 	else if(GetAsyncKeyState('D'))
 	{
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::RIGHT)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::RIGHT)
 		);
 	}
 	else if(GetAsyncKeyState('A'))
 	{
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::LEFT)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::LEFT)
 		);
 	}
 	else if(GetAsyncKeyState('E'))
 	{
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::RU)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::RU)
 		);
 	}
 	else if(GetAsyncKeyState('Q'))
 	{
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::LU)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::LU)
 		);
 	}
 	else if(GetAsyncKeyState(VK_SPACE))
 	{
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::LU)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::LU)
 		);
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::UP)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::UP)
 		);
 		m_pBulletSlot->push_back(
-			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fX, MY_MOVEDIRECTION::RU)
+			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::RU)
 		);
 	}
 }

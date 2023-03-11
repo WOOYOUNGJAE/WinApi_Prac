@@ -26,5 +26,5 @@ private:
 	list<CObj*> m_ObjList[OBJ_ID::OBJ_ID_END];
 
 	CObj* m_pPlayer;
-	list<CObj*> m_bulletList;
+	//list<CObj*> m_bulletList;
 };
