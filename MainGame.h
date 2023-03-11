@@ -1,5 +1,7 @@
 #pragma once
 #include "Define.h"
+#include "Player.h"
+
 class CMainGame
 {
 public:
@@ -20,4 +22,6 @@ public:
 
 private:
 	HDC m_dc;
+
+	CObj* m_pPlayer;
 };
