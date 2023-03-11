@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "framework.h"
 #include "WinApi_Prac.h"
+#include "MainGame.h"
 
 #define MAX_LOADSTRING 100
 
@@ -45,6 +46,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
     msg.message = WM_NULL;
 
+    CMainGame MainGame;
+    MainGame.Initialize();
+
     DWORD dwTime = GetTickCount64();
 
     // 기본 메시지 루프입니다:
@@ -67,6 +71,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             if (dwTime + 10 < GetTickCount64())
             {
                 //
+                MainGame.Update();
+                MainGame.LateUpdate();
+                MainGame.Render();
 
                 dwTime = GetTickCount64();
             }
@@ -188,6 +195,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         default:
             break;
         }
+        break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
