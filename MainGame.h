@@ -1,6 +1,6 @@
 #pragma once
 #include "Define.h"
-#include "Player.h"
+#include "AllObjHeaders.h"
 
 class CMainGame
 {
