@@ -21,10 +21,12 @@ public:
 	void Release();
 
 private:
+	void RenderAppInfo();
+private:
 	HDC m_dc;
+	AppStateInfo m_tAppInfo;
+
 
 	list<CObj*> m_ObjList[OBJ_ID::OBJ_ID_END];
-
-	CObj* m_pPlayer;
 	//list<CObj*> m_bulletList;
 };
