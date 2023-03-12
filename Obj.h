@@ -9,6 +9,7 @@ public:
 public:
 	// getter
 	int Get_State();
+	RECT& Get_Rect();
 
 	//setter
 	void Set_Pos(float _fX, float _fY)
@@ -20,6 +21,18 @@ public:
 	{
 		m_eMoveDir = _eDir;
 	}
+	void Set_State(bool _bOn, OBJ_STATE _eState)
+	{
+		if (_bOn)
+		{
+			m_eState |= _eState;
+		}
+		else
+		{
+			m_eState &= ~_eState;			
+		}
+	}
+	
 	// I U R R
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
@@ -29,9 +42,10 @@ public:
 
 	//	
 	virtual void RenewRECT();
-
+	virtual void CheckCollision(CObj* _pObjType);
 protected:
 	int m_eState;
+	int m_eObjID;
 	RECT m_rectInfo;
 	PosInfo m_tPosInfo;
 

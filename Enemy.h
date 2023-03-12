@@ -10,6 +10,7 @@ public:
 	// getter
 
 	//setter
+	void Set_BulletSlot(list<CObj*>* _pBulletSlot);
 
 	// I U R R
 	virtual void Initialize() override;
@@ -19,4 +20,7 @@ public:
 	virtual void Release() override;
 
 	void CheckWall();
+	virtual void CheckCollision(CObj* _pObjType);// override;
+private:
+	list<CObj*>* m_pBullet_FromPlayer;
 };

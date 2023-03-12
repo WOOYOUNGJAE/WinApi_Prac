@@ -22,6 +22,7 @@ public:
 
 private:
 	void RenderAppInfo();
+	void InstantiateObj(OBJ_ID _eID);
 private:
 	HDC m_dc;
 	AppStateInfo m_tAppInfo;

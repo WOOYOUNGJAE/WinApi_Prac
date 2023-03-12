@@ -51,6 +51,7 @@ CObj* CPlayer::CreateBullet(MY_MOVEDIRECTION _eDir)
 	return pTmpBullet;
 }
 
+
 void CPlayer::GetKey()
 {
 	if (GetAsyncKeyState(VK_UP))

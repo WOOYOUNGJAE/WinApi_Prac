@@ -16,6 +16,10 @@ int CObj::Get_State()
 {
 	return m_eState;
 }
+RECT& CObj::Get_Rect()
+{
+	return m_rectInfo;
+}
 
 void CObj::RenewRECT()
 {
@@ -23,4 +27,8 @@ void CObj::RenewRECT()
 	m_rectInfo.top = LONG(m_tPosInfo.fY - m_tPosInfo.fCY * 0.5f);
 	m_rectInfo.right = LONG(m_tPosInfo.fX + m_tPosInfo.fCX * 0.5f);
 	m_rectInfo.bottom = LONG(m_tPosInfo.fY + m_tPosInfo.fCY * 0.5f);
+}
+
+void CObj::CheckCollision(CObj* _pObjType)
+{
 }

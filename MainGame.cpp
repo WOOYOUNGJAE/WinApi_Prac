@@ -19,6 +19,11 @@ void CMainGame::Initialize()
 	{
 		m_ObjList[OBJ_ID::ID_PLAYER].push_back(Factory<CPlayer>::CreateObj());
 		static_cast<CPlayer*>(m_ObjList[OBJ_ID::ID_PLAYER].front())->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
+
+		//InstantiateObj(OBJ_ID::ID_PLAYER);
+
+
+
 		//m_ObjList[OBJ_ID::ID_PLAYER].push_back(m_pPlayer);
 		/*m_pPlayer = new CPlayer;
 		m_pPlayer->Initialize();*/
@@ -26,8 +31,11 @@ void CMainGame::Initialize()
 		//static_cast<CPlayer*>(m_pPlayer)->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
 
 	}
+
+	//InstantiateObj(ID_ENEMY);
 	
 	m_ObjList[OBJ_ID::ID_ENEMY].push_back(Factory<CEnemy>::CreateObj());
+	static_cast<CEnemy*>(m_ObjList[OBJ_ID::ID_ENEMY].front())->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
 
 }
 
@@ -107,4 +115,23 @@ void CMainGame::RenderAppInfo()
 
 
 
+}
+
+void CMainGame::InstantiateObj(OBJ_ID _eID)
+{
+	switch (_eID)
+	{
+	case OBJ_ID::ID_PLAYER :
+		m_ObjList[_eID].push_back(Factory<CPlayer>::CreateObj());
+		static_cast<CPlayer*>(m_ObjList[_eID].front())->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
+		break;
+	case OBJ_ID::ID_BULLET :
+		break;
+	case OBJ_ID::ID_ENEMY :
+		m_ObjList[_eID].push_back(Factory<CEnemy>::CreateObj());
+		static_cast<CEnemy*>(m_ObjList[_eID].front())->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
+		break;
+	default:
+		break;
+	}
 }

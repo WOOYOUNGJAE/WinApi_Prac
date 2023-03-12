@@ -6,7 +6,7 @@ class CPlayer : public CObj
 {
 public:
 	CPlayer();
-	~CPlayer();
+	virtual ~CPlayer();
 
 public:
 	// getter
@@ -23,7 +23,6 @@ public:
 
 	//
 	CObj* CreateBullet(MY_MOVEDIRECTION _eDir);
-
 	void GetKey();
 private:
 	list<CObj*>* m_pBulletSlot;

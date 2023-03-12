@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
+#include  "Bullet.h"
 
 CEnemy::CEnemy() 
 {
@@ -8,6 +9,11 @@ CEnemy::CEnemy()
 CEnemy::~CEnemy()
 {
 	Release();
+}
+
+void CEnemy::Set_BulletSlot(list<CObj*>* _pBulletSlot)
+{
+	m_pBullet_FromPlayer = _pBulletSlot;
 }
 
 void CEnemy::Initialize()
@@ -20,6 +26,11 @@ void CEnemy::Initialize()
 
 void CEnemy::Update()
 {
+	for (auto iter = m_pBullet_FromPlayer->begin(); iter != m_pBullet_FromPlayer->end(); ++iter)
+	{
+		CheckCollision((*iter));
+	}
+
 	CheckWall();
 
 	if (m_eMoveDir == MY_MOVEDIRECTION::LEFT)
@@ -65,6 +76,20 @@ void CEnemy::CheckWall()
 		if (m_tPosInfo.fX > DESTROYZONE_RIGHT - m_tPosInfo.fCX * 0.5f)
 		{
 			m_eMoveDir = MY_MOVEDIRECTION::LEFT;
+		}
+	}
+}
+
+void CEnemy::CheckCollision(CObj* _pObjType)
+{
+	RECT* pOtherRC = &_pObjType->Get_Rect();
+	RECT rcColArea{};
+	if ( IntersectRect(&rcColArea, &m_rectInfo, pOtherRC) )
+	{
+		if (dynamic_cast<CBullet*>(_pObjType))
+		{
+			static_cast<CBullet*>(_pObjType)->Set_State(false, OBJ_STATE::ACTIVE);
+			m_eState &= ~OBJ_STATE::ACTIVE;
 		}
 	}
 }
