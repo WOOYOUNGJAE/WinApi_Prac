@@ -2,7 +2,7 @@
 #include "MainGame.h"
 #include "Factory.h"
 
-CMainGame::CMainGame() : m_pPlayer(nullptr)
+CMainGame::CMainGame() : m_tAppInfo {}
 {
 }
 
@@ -75,6 +75,8 @@ void CMainGame::Render()
 			(*iter)->Render(m_dc);
 		}
 	}
+
+	RenderAppInfo();
 }
 
 void CMainGame::Release()
@@ -86,4 +88,23 @@ void CMainGame::Release()
 			SAFE_DELETE(*iter);
 		}
 	}
+}
+
+void CMainGame::RenderAppInfo()
+{
+	++m_tAppInfo.iFPS;
+
+	if (GetTickCount() > m_tAppInfo.dwTime + 1000)
+	{
+		// Set String
+		swprintf_s(m_tAppInfo.szFPS, L"FPS : %d", m_tAppInfo.iFPS);
+
+		SetWindowText(g_hwnd, m_tAppInfo.szFPS);
+
+		m_tAppInfo.iFPS = 0;
+		m_tAppInfo.dwTime = GetTickCount();
+	}
+
+
+
 }

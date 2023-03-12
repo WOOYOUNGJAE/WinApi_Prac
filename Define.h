@@ -17,6 +17,13 @@ struct PosInfo
 	float fCY;
 };
 
+struct AppStateInfo
+{
+	TCHAR szFPS[32];
+	int iFPS;
+	DWORD dwTime;
+};
+
 enum MY_MOVEDIRECTION
 {
 	UP,
