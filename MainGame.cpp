@@ -15,18 +15,19 @@ void CMainGame::Initialize()
 {
 	m_dc = GetDC(g_hwnd);
 
-	if (m_pPlayer == nullptr)
+	if (m_ObjList[OBJ_ID::ID_PLAYER].empty())
 	{
 		m_ObjList[OBJ_ID::ID_PLAYER].push_back(Factory<CPlayer>::CreateObj());
 		static_cast<CPlayer*>(m_ObjList[OBJ_ID::ID_PLAYER].front())->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
-		m_ObjList[OBJ_ID::ID_PLAYER].push_back(m_pPlayer);
+		//m_ObjList[OBJ_ID::ID_PLAYER].push_back(m_pPlayer);
 		/*m_pPlayer = new CPlayer;
 		m_pPlayer->Initialize();*/
 		
 		//static_cast<CPlayer*>(m_pPlayer)->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
 
 	}
-
+	
+	m_ObjList[OBJ_ID::ID_ENEMY].push_back(Factory<CEnemy>::CreateObj());
 
 }
 

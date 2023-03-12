@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
-CEnemy::CEnemy()
+CEnemy::CEnemy() 
 {
 }
 
@@ -12,7 +12,7 @@ CEnemy::~CEnemy()
 
 void CEnemy::Initialize()
 {
-	m_tPosInfo = { WINCX * 0.5f ,50.f , 50, 20 };
+	m_tPosInfo = { WINCX * 0.5f , DESTROYZONE_TOP + 50.f , 50, 20 };
 
 	m_eMoveDir = MY_MOVEDIRECTION::RIGHT;
 	m_fMoveSpeed = 8.f;
@@ -55,14 +55,14 @@ void CEnemy::CheckWall()
 {
 	if (m_eMoveDir == MY_MOVEDIRECTION::LEFT)
 	{
-		if (m_tPosInfo.fX < m_tPosInfo.fCX * 0.5f)
+		if (m_tPosInfo.fX < DESTROYZONE_LEFT + m_tPosInfo.fCX * 0.5f)
 		{
 			m_eMoveDir = MY_MOVEDIRECTION::RIGHT;
 		}
 	}
 	else if (m_eMoveDir == MY_MOVEDIRECTION::RIGHT)
 	{
-		if (m_tPosInfo.fX > WINCX - m_tPosInfo.fCX * 0.5f)
+		if (m_tPosInfo.fX > DESTROYZONE_RIGHT - m_tPosInfo.fCX * 0.5f)
 		{
 			m_eMoveDir = MY_MOVEDIRECTION::LEFT;
 		}

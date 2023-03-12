@@ -34,7 +34,7 @@ enum OBJ_ID
 {
 	ID_PLAYER,
 	ID_BULLET,
-	ID,ENEMY,
+	ID_ENEMY,
 	OBJ_ID_END,
 };
 

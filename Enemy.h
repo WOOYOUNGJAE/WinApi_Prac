@@ -1,6 +1,6 @@
 #pragma once
 #include  "Obj.h"
-class CEnemy : CObj
+class CEnemy : public CObj
 {
 public:
 	CEnemy();
