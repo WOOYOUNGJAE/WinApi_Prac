@@ -38,6 +38,8 @@ void CMainGame::Initialize()
 	m_ObjList[OBJ_ID::ID_ENEMY].push_back(Factory<CEnemy>::CreateObj());
 	static_cast<CEnemy*>(m_ObjList[OBJ_ID::ID_ENEMY].front())->Set_BulletSlot(&m_ObjList[OBJ_ID::ID_BULLET]);
 
+	m_ObjList[OBJ_ID::ID_MOUSE].push_back(Factory<CMouse>::CreateObj());
+
 }
 
 void CMainGame::Update()

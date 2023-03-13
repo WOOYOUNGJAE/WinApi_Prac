@@ -12,4 +12,3 @@ public:
 	static bool If_InSphereRange(CObj* _Dst, CObj* _Src);
 
 };
-

@@ -150,6 +150,7 @@
     <ClInclude Include="Factory.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="WinApi_Prac.cpp" />
