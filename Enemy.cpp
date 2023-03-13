@@ -26,10 +26,10 @@ void CEnemy::Initialize()
 
 void CEnemy::Update()
 {
-	for (auto iter = m_pBullet_FromPlayer->begin(); iter != m_pBullet_FromPlayer->end(); ++iter)
+	/*for (auto iter = m_pBullet_FromPlayer->begin(); iter != m_pBullet_FromPlayer->end(); ++iter)
 	{
 		CheckCollision((*iter));
-	}
+	}*/
 
 	CheckWall();
 

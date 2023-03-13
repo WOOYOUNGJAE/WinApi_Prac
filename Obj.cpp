@@ -21,6 +21,11 @@ RECT& CObj::Get_Rect()
 	return m_rectInfo;
 }
 
+PosInfo& CObj::Get_PosInfo()
+{
+	return m_tPosInfo;
+}
+
 void CObj::RenewRECT()
 {
 	m_rectInfo.left = LONG(m_tPosInfo.fX - m_tPosInfo.fCX * 0.5f);

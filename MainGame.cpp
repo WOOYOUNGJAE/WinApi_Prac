@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainGame.h"
 #include "Factory.h"
+#include "CCollisionManager.h"
 
 CMainGame::CMainGame() : m_tAppInfo {}
 {
@@ -69,6 +70,8 @@ void CMainGame::LateUpdate()
 			(*iter)->LateUpdate();
 		}
 	}
+
+	CCollisionManager::CheckCollision_Sphere(m_ObjList[OBJ_ID::ID_BULLET], m_ObjList[OBJ_ID::ID_ENEMY]);
 }
 
 void CMainGame::Render()

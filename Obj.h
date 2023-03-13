@@ -10,6 +10,7 @@ public:
 	// getter
 	int Get_State();
 	RECT& Get_Rect();
+	PosInfo& Get_PosInfo();
 
 	//setter
 	void Set_Pos(float _fX, float _fY)
