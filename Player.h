@@ -24,6 +24,17 @@ public:
 	//
 	CObj* CreateBullet(MY_MOVEDIRECTION _eDir);
 	void GetKey();
+
+private: // methods
+	void MoveForward();
+	void Rotate();
 private:
 	list<CObj*>* m_pBulletSlot;
+
+	//rotate info
+	float fTmpX;
+	float fTmpY;
+	float fDegree;
+	float fDelta;
+	float fCurrentTime;
 };

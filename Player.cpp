@@ -3,7 +3,7 @@
 #include "Bullet.h"
 #include "Factory.h"
 
-CPlayer::CPlayer(): m_pBulletSlot(nullptr)
+CPlayer::CPlayer(): m_pBulletSlot(nullptr), fDegree(0)
 {
 }
 
@@ -26,6 +26,9 @@ void CPlayer::Update()
 {
 	GetKey();
 
+	Rotate();
+	MoveForward();
+
 	CObj::RenewRECT();
 }
 
@@ -35,6 +38,11 @@ void CPlayer::LateUpdate()
 
 void CPlayer::Render(HDC _dc)
 {
+	// debugger
+
+	MoveToEx(_dc, m_tPosInfo.fX, m_tPosInfo.fY, nullptr);
+	LineTo(_dc, m_tPosInfo.fX + fTmpX * 100, m_tPosInfo.fY + fTmpY * 100);
+
 	Rectangle(_dc, m_rectInfo.left, m_rectInfo.top, m_rectInfo.right, m_rectInfo.bottom);
 }
 
@@ -113,4 +121,32 @@ void CPlayer::GetKey()
 			Factory<CBullet>::CreateObj(m_tPosInfo.fX, m_tPosInfo.fY, MY_MOVEDIRECTION::RU)
 		);
 	}
+}
+
+void CPlayer::MoveForward()
+{
+	fTmpX = cosf(fDegree);
+	fTmpY = sinf(fDegree);
+
+	
+
+	if (GetAsyncKeyState('I'))
+	{
+		m_tPosInfo.fX += fTmpX * m_fMoveSpeed;
+		m_tPosInfo.fY += fTmpY * m_fMoveSpeed;
+	}
+}
+
+void CPlayer::Rotate()
+{
+	++fCurrentTime; // tmp
+	if (GetAsyncKeyState('J'))
+	{
+		fDegree += 0.05f;
+	}
+	else if (GetAsyncKeyState('L'))
+	{
+		fDegree -= 0.05f;
+	}
+
 }
