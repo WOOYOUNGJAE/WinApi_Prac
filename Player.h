@@ -32,9 +32,7 @@ private:
 	list<CObj*>* m_pBulletSlot;
 
 	//rotate info
-	float fTmpX;
-	float fTmpY;
+	float fDeltaX;
+	float fDeltaY;
 	float fDegree;
-	float fDelta;
-	float fCurrentTime;
 };

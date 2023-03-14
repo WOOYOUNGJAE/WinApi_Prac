@@ -41,7 +41,7 @@ void CPlayer::Render(HDC _dc)
 	// debugger
 
 	MoveToEx(_dc, m_tPosInfo.fX, m_tPosInfo.fY, nullptr);
-	LineTo(_dc, m_tPosInfo.fX + fTmpX * 100, m_tPosInfo.fY + fTmpY * 100);
+	LineTo(_dc, m_tPosInfo.fX + fDeltaX * 100, m_tPosInfo.fY + fDeltaY * 100);
 
 	Rectangle(_dc, m_rectInfo.left, m_rectInfo.top, m_rectInfo.right, m_rectInfo.bottom);
 }
@@ -125,21 +125,20 @@ void CPlayer::GetKey()
 
 void CPlayer::MoveForward()
 {
-	fTmpX = cosf(fDegree);
-	fTmpY = sinf(fDegree);
+	fDeltaX = cosf(fDegree);
+	fDeltaY = sinf(fDegree);
 
 	
 
 	if (GetAsyncKeyState('I'))
 	{
-		m_tPosInfo.fX += fTmpX * m_fMoveSpeed;
-		m_tPosInfo.fY += fTmpY * m_fMoveSpeed;
+		m_tPosInfo.fX += fDeltaX * m_fMoveSpeed;
+		m_tPosInfo.fY += fDeltaY * m_fMoveSpeed;
 	}
 }
 
 void CPlayer::Rotate()
 {
-	++fCurrentTime; // tmp
 	if (GetAsyncKeyState('J'))
 	{
 		fDegree += 0.05f;
