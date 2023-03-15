@@ -54,4 +54,5 @@ protected:
 	// ©РаВюс
 	MY_MOVEDIRECTION m_eMoveDir;
 	float m_fMoveSpeed;
+	float m_fAngle; // dir
 };

@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include  "Bullet.h"
 
+#define PI 3.141592f
 CEnemy::CEnemy() 
 {
 }
@@ -14,6 +15,11 @@ CEnemy::~CEnemy()
 void CEnemy::Set_BulletSlot(list<CObj*>* _pBulletSlot)
 {
 	m_pBullet_FromPlayer = _pBulletSlot;
+}
+
+void CEnemy::Set_Player(CObj* _pPlayer)
+{
+	m_pPlayer = _pPlayer;
 }
 
 void CEnemy::Initialize()
@@ -31,22 +37,33 @@ void CEnemy::Update()
 		CheckCollision((*iter));
 	}*/
 
-	CheckWall();
+	//CheckWall();
 
-	if (m_eMoveDir == MY_MOVEDIRECTION::LEFT)
+	/*if (m_eMoveDir == MY_MOVEDIRECTION::LEFT)
 	{
 		m_tPosInfo.fX -= m_fMoveSpeed;
 	}
 	else if (m_eMoveDir == MY_MOVEDIRECTION::RIGHT)
 	{
 		m_tPosInfo.fX += m_fMoveSpeed;
-	}
+	}*/
+
+	TargetPlayer(); // angle 업데이트
+
+	m_fTargetX = (m_tPosInfo.fX + cosf(m_fAngle));
+	m_fTargetY = (m_tPosInfo.fY + sinf(m_fAngle));
+
+	m_tPosInfo.fX = m_fTargetX;
+	m_tPosInfo.fY = m_fTargetY;
 
 	CObj::RenewRECT();
 }
 
 void CEnemy::LateUpdate()
 {
+	
+
+
 }
 
 void CEnemy::Render(HDC _dc)
@@ -56,6 +73,9 @@ void CEnemy::Render(HDC _dc)
 		m_rectInfo.top,
 		m_rectInfo.right,
 		m_rectInfo.bottom);
+
+	/*MoveToEx(_dc, m_tPosInfo.fX, m_tPosInfo.fY, nullptr);
+	LineTo(_dc, targetPoint.x * 100.f, targetPoint.y * 100.f);*/
 }
 
 void CEnemy::Release()
@@ -92,4 +112,28 @@ void CEnemy::CheckCollision(CObj* _pObjType)
 			m_eState &= ~OBJ_STATE::ACTIVE;
 		}
 	}
+}
+
+void CEnemy::TargetPlayer()
+{
+	float fWidth = (m_pPlayer->Get_PosInfo().fX - m_tPosInfo.fX);
+	float fHeight = (m_pPlayer->Get_PosInfo().fY - m_tPosInfo.fY); 
+
+	//m_fDistanceToPlayer = sqrt(fWidth * fWidth + fHeight * fHeight);
+
+
+	float rate = fHeight / fWidth;
+
+	//m_fAngle = atan2(fHeight, fWidth);
+
+	m_fAngle = atanf(rate);
+
+	if (m_fAngle > PI * 0.5f)
+	{
+		m_fAngle -= PI;
+	}
+	else if (m_fAngle < -PI * 0.5f)
+	{
+		m_fAngle += PI;
+	}	
 }

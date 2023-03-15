@@ -43,6 +43,7 @@ enum OBJ_ID
 	ID_BULLET,
 	ID_ENEMY,
 	ID_MOUSE,
+	ID_SHIELD,
 	OBJ_ID_END,
 };
 

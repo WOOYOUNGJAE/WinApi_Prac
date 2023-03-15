@@ -58,15 +58,15 @@ void CPlayer::GetKey()
 	{
 		m_tPosInfo.fY -= m_fMoveSpeed;
 	}
-	else if(GetAsyncKeyState(VK_RIGHT))
+	if(GetAsyncKeyState(VK_RIGHT))
 	{
 		m_tPosInfo.fX += m_fMoveSpeed;
 	}
-	else if(GetAsyncKeyState(VK_DOWN))
+	if(GetAsyncKeyState(VK_DOWN))
 	{
 		m_tPosInfo.fY += m_fMoveSpeed;
 	}
-	else if(GetAsyncKeyState(VK_LEFT))
+	if(GetAsyncKeyState(VK_LEFT))
 	{
 		m_tPosInfo.fX -= m_fMoveSpeed;
 	}

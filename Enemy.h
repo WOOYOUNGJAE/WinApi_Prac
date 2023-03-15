@@ -11,6 +11,7 @@ public:
 
 	//setter
 	void Set_BulletSlot(list<CObj*>* _pBulletSlot);
+	void Set_Player(CObj* _pPlayer);
 
 	// I U R R
 	virtual void Initialize() override;
@@ -21,6 +22,13 @@ public:
 
 	void CheckWall();
 	virtual void CheckCollision(CObj* _pObjType);// override;
+
+
+	void TargetPlayer();
 private:
 	list<CObj*>* m_pBullet_FromPlayer;
+	CObj* m_pPlayer;
+	float m_fDistanceToPlayer;
+	float m_fTargetX;
+	float m_fTargetY;
 };
