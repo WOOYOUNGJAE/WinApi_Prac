@@ -24,7 +24,7 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	GetKey();
+	//GetKey();
 
 	CObj::RenewRECT();
 }

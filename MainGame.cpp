@@ -42,6 +42,8 @@ void CMainGame::Initialize()
 	m_ObjList[OBJ_ID::ID_MOUSE].push_back(Factory<CMouse>::CreateObj());
 	m_ObjList[OBJ_ID::ID_SHIELD].push_back(Factory<CShield>::CreateObj());
 	static_cast<CShield*>(m_ObjList[ID_SHIELD].front())->Set_Player(m_ObjList[OBJ_ID::ID_PLAYER].front());
+
+	m_ObjList[ID_ROTATION].push_back(Factory<CRotationObj>::CreateObj());
 }
 
 void CMainGame::Update()
