@@ -1,6 +1,7 @@
 #pragma once
 #include "Define.h"
 #include "AllObjHeaders.h"
+#include "DebugLog.h"
 
 class CMainGame
 {
@@ -30,4 +31,6 @@ private:
 
 	list<CObj*> m_ObjList[OBJ_ID::OBJ_ID_END];
 	//list<CObj*> m_bulletList;
+
+	DebugLog Debug;
 };

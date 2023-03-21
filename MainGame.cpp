@@ -2,6 +2,9 @@
 #include "MainGame.h"
 #include "Factory.h"
 #include "CCollisionManager.h"
+#include "Managers.h"
+#include "Line.h"
+#include "LineManager2.h"
 
 CMainGame::CMainGame() : m_tAppInfo {}
 {
@@ -43,7 +46,14 @@ void CMainGame::Initialize()
 	m_ObjList[OBJ_ID::ID_SHIELD].push_back(Factory<CShield>::CreateObj());
 	static_cast<CShield*>(m_ObjList[ID_SHIELD].front())->Set_Player(m_ObjList[OBJ_ID::ID_PLAYER].front());
 
-	m_ObjList[ID_ROTATION].push_back(Factory<CRotationObj>::CreateObj());
+	m_ObjList[ID_ROTATION].push_back(Factory<CMario2>::CreateObj());
+	/*m_ObjList[ID_FOLLOWING].push_back(Factory<CFollowingObj>::CreateObj(600, 600));
+	static_cast<CFollowingObj*>(m_ObjList[ID_FOLLOWING].front())->Set_Target(m_ObjList[OBJ_ID::ID_ROTATION].front());*/
+	CLineManager::Get_Instance()->Set_Player(m_ObjList[OBJ_ID::ID_ROTATION].front());
+	CLineManager::Get_Instance()->Initiate();
+	CLineManager::Get_Instance()->AddLine(
+		new CLine(0, 550, 800, 600)
+	);
 }
 
 void CMainGame::Update()
@@ -64,7 +74,7 @@ void CMainGame::Update()
 			}
 		}
 	}
-
+	CLineManager2::Get_Instance()->Update();
 }
 
 void CMainGame::LateUpdate()
@@ -78,6 +88,7 @@ void CMainGame::LateUpdate()
 	}
 
 	CCollisionManager::CheckCollision_Sphere(m_ObjList[OBJ_ID::ID_BULLET], m_ObjList[OBJ_ID::ID_ENEMY]);
+	CLineManager::Get_Instance()->CheckPlayerOnGround();
 }
 
 void CMainGame::Render()
@@ -94,6 +105,11 @@ void CMainGame::Render()
 	}
 
 	RenderAppInfo();
+	/*;
+	Debug.Print0(m_dc, L"Hello");
+	Debug.Print1(m_dc, Debug.Combine_Str(L"Pow: ", 12.3f));*/
+	CLineManager::Get_Instance()->Render(m_dc);
+	CLineManager2::Get_Instance()->Render(m_dc);
 }
 
 void CMainGame::Release()
